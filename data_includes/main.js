@@ -25,14 +25,14 @@ newTrial("instruction",
     ,
     newText("在阅读完句子后，您需要回答和句子内容有关的问题。")
     ,
-    newText("请在下方输入您的ID，并点击<b>开始</b>按钮以开始实验。")
+    newText("请在下方输入您的ID，并点击<button>开始</button>按钮以开始实验。")
     ,
     newTextInput("inputID", "")
         .center()
         .css("margin","1em")    // Add a 1em margin around this element
         .print()
     ,
-    newButton("Start")
+    newButton("开始")
         .center()
         .print()
         // Only validate a click on Start when inputID has been filled
@@ -62,7 +62,8 @@ newTrial( "experiment",
     ,
     // We use the native-Ibex "DashedSentence" controller
     // Documentation at:   https://github.com/addrummond/ibex/blob/master/docs/manual.md#dashedsentence
-    newController("DashedSentence", {s : "You have just begun reading the sentence you have just finished reading."})
+    newController("DashedSentence", {s : "This is an example."})
+        .center()
         .print()
         .log()      // Make sure to log the participant's progress
         .wait()
@@ -74,23 +75,23 @@ newTrial( "experiment",
 )
 
 // Second, more concise experiment trial
-Template("items.csv", row =>
+Template("stimuli.csv", row =>
     newTrial( "experiment",
-    // Automatically print all Text and Button elements, centered
-    defaultText.center().print()
-    ,
-    defaultButton.center().print()
-    ,
-    newController("DashedSentence", row.Sentence)
-        .center()
-        .print()
-        .log()
-        .wait()
-        .remove()
-    ,
-    newButton("I'm done")
-        .print()
-        .wait()
+        // Automatically print all Text and Button elements, centered
+        defaultText.center().print()
+        ,
+        defaultButton.center().print()
+        ,
+        newController("DashedSentence", {s : row.Sentence})
+            .center()
+            .print()
+            .log()
+            .wait()
+            .remove()
+        ,
+        newButton("I'm done")
+            .print()
+            .wait()
     )
 )
 
