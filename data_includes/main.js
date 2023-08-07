@@ -13,9 +13,11 @@ Header(
 .log( "id" , getVar("ID") ) // Add the ID to all trials' results lines
 
 // Instructions
-newTrial("instructions",
-     // Automatically print all Text elements, centered
+newTrial("instruction",
+    // Automatically print all Text and Button elements, centered
     defaultText.center().print()
+    ,
+    defaultButton.center().print()
     ,
     newText("欢迎参加该阅读实验。")
     ,
@@ -40,10 +42,12 @@ newTrial("instructions",
     getVar("ID").set( getTextInput("inputID") )
 )
 
-// First experiment trial
+// First, practice trial
 newTrial( "experiment",
-     // Automatically print all Text elements, centered
-     defaultText.center().print()
+    // Automatically print all Text and Button elements, centered
+    defaultText.center().print()
+    ,
+    defaultButton.center().print()
     ,
     newText("instructions", "Click on the button below to start reading. Click spacebar to proceed to the next word.")
         .print()
@@ -70,8 +74,15 @@ newTrial( "experiment",
 )
 
 // Second, more concise experiment trial
-newTrial( "experiment",
-    newController("DashedSentence", {s : "小明 游 着 泳。"})
+Template("items.csv", row =>
+    newTrial( "experiment",
+    // Automatically print all Text and Button elements, centered
+    defaultText.center().print()
+    ,
+    defaultButton.center().print()
+    ,
+    newController("DashedSentence", row.Sentence)
+        .center()
         .print()
         .log()
         .wait()
@@ -80,7 +91,9 @@ newTrial( "experiment",
     newButton("I'm done")
         .print()
         .wait()
+    )
 )
+
 
 // Final screen
 newTrial("end",
