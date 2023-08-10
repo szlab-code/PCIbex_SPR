@@ -175,6 +175,8 @@ Template("stimuli.csv", row =>
 
 // Final screen
 newTrial("end",
+    defaultText.center().print()
+    ,
     newText("非常感谢！您已完成该部分实验。")
         .center()
     ,
