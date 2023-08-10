@@ -6,12 +6,13 @@
     font-style: italic;
     clear: left;
     padding-top: 1em;
-    font-size: small;
+    font-size: medium;
 }
 li.normal-answer {
     text-align: left;
     cursor: pointer;
     padding-bottom: 1em;
+    font-size: large;
 }
 li:hover.normal-answer {
     cursor: pointer;

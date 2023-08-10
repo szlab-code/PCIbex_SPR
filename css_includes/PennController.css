@@ -1,4 +1,15 @@
 .PennController {
     width: 40em !important;
     margin-left: calc(50vw - 20em);
+    font-size: large;
+}
+
+.Text-container {
+    font-size: large;
+    margin: 0.6em;
+}
+
+.Button {
+    font-size: large;
+    margin: 0.6em;
 }
