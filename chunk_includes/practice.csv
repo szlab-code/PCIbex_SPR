@@ -1,9 +1,17 @@
-﻿Item,List,LexicalAspect,GrammaticalAspect,Sentence,Question,Correct,Wrong,NP1,V,ASP,NP2,QuestionType,VP
-1,1,practice,practice,这 是 一个 例句。,刚刚的句子是一个例句。,正确,错误,这,是,一个,例句,practice,practice
-2,1,practice,practice,超市 没有 吉他 出售。,超市里可以购买吉他。,错误,正确,超市,没有,吉他,出售,practice,practice
-3,1,practice,practice,新疆 水果 非常 好吃。,哪里的水果非常好吃？,新疆,格陵兰岛,新疆,水果,非常,好吃,practice,practice
-4,1,practice,practice,四川 有 野生 熊猫。,四川有什么野生动物？,熊猫,鲸鱼,四川,有,野生,熊猫,practice,practice
-1,2,practice,practice,这 是 一个 例句。,刚刚的句子是一个例句。,正确,错误,这,是,一个,例句,practice,practice
-2,2,practice,practice,超市 没有 吉他 出售。,超市里可以购买吉他。,错误,正确,超市,没有,吉他,出售,practice,practice
-3,2,practice,practice,新疆 水果 非常 好吃。,哪里的水果非常好吃？,新疆,格陵兰岛,新疆,水果,非常,好吃,practice,practice
-4,2,practice,practice,四川 有 野生 熊猫。,四川有什么野生动物？,熊猫,鲸鱼,四川,有,野生,熊猫,practice,practice
+﻿Item,List,Order,LexicalAspect,GrammaticalAspect,Sentence,Question,Correct,Wrong,NP1,V,ASP,NP2,QuestionType,VP
+p01,1,1,practice,practice,这 是 一个 例句。,刚刚的句子是一个例句。,正确,错误,这,是,一个,例句,yes_no,practice
+p02,1,2,practice,practice,这边 的 超市 没有 吉他 出售。,超市里可以买到吉他。,错误,正确,超市,没有,吉他,出售,yes_no,practice
+p03,1,3,practice,practice,我 喜欢 新疆， 那里 水果 非常 好吃。,哪里的水果非常好吃？,新疆,格陵兰岛,新疆,水果,非常,好吃,who,practice
+p04,1,4,practice,practice,四川 有 野生 熊猫。,四川有什么野生动物？,熊猫,鲸鱼,四川,有,野生,熊猫,what,practice
+p01,2,1,practice,practice,这 是 一个 例句。,刚刚的句子是一个例句。,正确,错误,这,是,一个,例句,yes_no,practice
+p02,2,2,practice,practice,这边 的 超市 没有 吉他 出售。,超市里可以购买吉他。,错误,正确,超市,没有,吉他,出售,yes_no,practice
+p03,2,3,practice,practice,我 喜欢 新疆， 那里 水果 非常 好吃。,哪里的水果非常好吃？,新疆,格陵兰岛,新疆,水果,非常,好吃,who,practice
+p04,2,4,practice,practice,四川 有 野生 熊猫。,四川有什么野生动物？,熊猫,鲸鱼,四川,有,野生,熊猫,what,practice
+p01,3,1,practice,practice,这 是 一个 例句。,刚刚的句子是一个例句。,正确,错误,这,是,一个,例句,yes_no,practice
+p02,3,2,practice,practice,这边 的 超市 没有 吉他 出售。,超市里可以买到吉他。,错误,正确,超市,没有,吉他,出售,yes_no,practice
+p03,3,3,practice,practice,我 喜欢 新疆， 那里 水果 非常 好吃。,哪里的水果非常好吃？,新疆,格陵兰岛,新疆,水果,非常,好吃,who,practice
+p04,3,4,practice,practice,四川 有 野生 熊猫。,四川有什么野生动物？,熊猫,鲸鱼,四川,有,野生,熊猫,what,practice
+p01,4,1,practice,practice,这 是 一个 例句。,刚刚的句子是一个例句。,正确,错误,这,是,一个,例句,yes_no,practice
+p02,4,2,practice,practice,这边 的 超市 没有 吉他 出售。,超市里可以购买吉他。,错误,正确,超市,没有,吉他,出售,yes_no,practice
+p03,4,3,practice,practice,我 喜欢 新疆， 那里 水果 非常 好吃。,哪里的水果非常好吃？,新疆,格陵兰岛,新疆,水果,非常,好吃,who,practice
+p04,4,4,practice,practice,四川 有 野生 熊猫。,四川有什么野生动物？,熊猫,鲸鱼,四川,有,野生,熊猫,what,practice
