@@ -10,7 +10,7 @@ Sequence("welcome", "instruction", "before_start", "experiment", SendResults(), 
 // This is run at the beginning of each trial
 Header(
     // Declare a global Var element "ID" in which we will store the participant's ID
-    newVar("ID").global()    
+    newVar("ID").global()
 )
 .log( "id" , getVar("ID") ) // Add the ID to all trials' results lines
 
@@ -21,9 +21,9 @@ newTrial("welcome",
     ,
     defaultButton.center().print()
     ,
-    newText("<p>欢迎参加该阅读实验。</p><p>在该实验中，您将会阅读一系列句子。</p><p>阅读完句子后，您需要回答和句子内容有关的问题。</p><p>请在下方输入您的ID，并点击<b>开始</b>按钮以开始练习。</p>")
+    newText("<p>欢迎参加该阅读实验。</p><p>在该实验中，您将会阅读一系列句子。</p><p>阅读完句子后，您需要回答和句子内容有关的问题。</p><p>请核对下方您的Prolific ID是否正确，然后点击<b>开始</b>按钮以开始练习。</p>")
     ,
-    newTextInput("inputID", "")
+    newTextInput("inputID", GetURLParameter("PROLIFIC_PID"))
         .center()
         .css("margin","1em")    // Add a 1em margin around this element
         .print()
@@ -182,11 +182,13 @@ newTrial("end",
     defaultText.center().print()
     ,
     newText("非常感谢！您已完成该部分实验。")
-        .center()
     ,
     // This link a placeholder: replace it with a URL provided by your participant-pooling platform
-    newText("<p><a href='https://www.pcibex.net/' target='_blank'>请点击此处</a>，进入实验第二部分，填写一份与您语言背景有关的调查问卷。</p>")
-        .center()
+    newText("<a href='https://lhq-blclab.org/student/experiment_load_login/?questionnaire_ID=mep39gtd&PROLIFIC_PID="+GetURLParameter("PROLIFIC_PID")+"' target='_blank'>请点击此处</a>，进入实验第二部分，填写一份与您语言背景有关的调查问卷。")
+    ,
+    newText("填写调查问卷时，请在<b>被试编号</b>一栏填入您的Prolific ID。")
+    ,
+    newText("您的Prolific ID是<b>"+GetURLParameter("PROLIFIC_PID")+"</b>。")
     ,
     // Trick: stay on this trial forever (until tab is closed)
     newButton().wait()
