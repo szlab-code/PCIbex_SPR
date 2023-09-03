@@ -188,7 +188,7 @@ newTrial("end",
     ,
     newText("填写调查问卷时，请在<b>被试编号</b>一栏填入您的Prolific ID。")
     ,
-    newText("您的Prolific ID是<b>"+GetURLParameter("PROLIFIC_PID")+"</b>。")
+    newText("您的Prolific ID是 <b>"+GetURLParameter("PROLIFIC_PID")+"</b>。")
     ,
     // Trick: stay on this trial forever (until tab is closed)
     newButton().wait()
