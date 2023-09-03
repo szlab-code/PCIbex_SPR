@@ -1,5 +1,7 @@
 PennController.ResetPrefix(null); // Shorten command names (keep this line here))
 
+CheckPreloaded()
+
 // DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 // First show instructions, then experiment trials, send results and show end screen
