@@ -44,7 +44,7 @@ newTrial("welcome",
 // First, practice trial
 Template(GetTable("practice.csv")
     .setGroupColumn("List")
-    .filter("List", /1/)
+    //.filter("List", /1/)
     , 
     row =>
     newTrial( "instruction",
@@ -102,7 +102,7 @@ Template(GetTable("practice.csv")
         newController("Question", {
             q: row.Question, 
             as: [row.Correct, row.Wrong],
-            instructions: "请根据句子内容，点击并选择正确选项。",
+            instructions: "请根据句子内容，选择并点击正确选项。",
             hasCorrect: true, 
             showNumbers: false
         })
@@ -140,7 +140,7 @@ newTrial("before_start",
 // Third, formal experiment trial
 Template(GetTable("stimuli.csv")
     .setGroupColumn("List")
-    .filter("List", /1/)
+    //.filter("List", /1/)
     , 
     row =>
     newTrial( "experiment",
