@@ -1,18 +1,19 @@
 .Question {
     margin-left: 0;
     padding-left: 0;
+    font-size: xx-large;
 }
 .instructions-text {
     font-style: italic;
     clear: left;
     padding-top: 1em;
-    font-size: medium;
+    font-size: x-large;
 }
 li.normal-answer {
     text-align: left;
     cursor: pointer;
     padding-bottom: 1em;
-    font-size: large;
+    font-size: xx-large;
 }
 li:hover.normal-answer {
     cursor: pointer;

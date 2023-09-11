@@ -2,6 +2,8 @@ PennController.ResetPrefix(null); // Shorten command names (keep this line here)
 
 CheckPreloaded()
 
+var showProgressBar = false
+
 // DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 // First show instructions, then experiment trials, send results and show end screen
@@ -16,38 +18,46 @@ Header(
 
 // Instructions
 newTrial("welcome",
-    // Automatically print all Text and Button elements, centered
-    defaultText.center().print()
-    ,
-    defaultButton.center().print()
-    ,
-    newText("<p>欢迎参加该阅读实验。</p><p>在该实验中，您将会阅读一系列句子。</p><p>阅读完句子后，您需要回答和句子内容有关的问题。</p><p>请核对下方您的Prolific ID是否正确，然后点击<b>开始</b>按钮以开始练习。</p>")
+    newText("<p>欢迎参加该阅读实验，该部分实验耗时约15分钟。</p><p>在本实验中，您将会阅读一系列句子。</p><p>阅读完句子后，您需要回答和句子内容有关的问题。</p><p>请核对下方您的Prolific ID是否正确，然后点击<b>开始</b>按钮，开始练习。</p>")
+        .center()
+        .css("margin", "1.25em")
+        .print("center at 50vw", "bottom at 50vh")
     ,
     newTextInput("inputID", GetURLParameter("PROLIFIC_PID"))
         .center()
-        .css("margin","1em")    // Add a 1em margin around this element
-        .print()
+        .css({"margin": "1.25em", "font-size": "x-large"})    // Add a 1em margin around this element
+        .print("center at 50vw", "middle at 50vh")
     ,
     newButton("开始")
         .center()
+        .css("margin", "1.25em")
+        .print("center at 50vw", "top at 50vh")
         // Only validate a click on Start when inputID has been filled
         .wait( getTextInput("inputID").testNot.text("") )
     ,
     // Store the text from inputID into the Var element
     getVar("ID").set( getTextInput("inputID") )
+    ,
+    fullscreen()
 )
 
 // First, practice trial
-Template("practice.csv", row =>
+Template(GetTable("practice.csv")
+    .setGroupColumn("List")
+    .filter("List", /1/)
+    , 
+    row =>
     newTrial( "instruction",
         // Automatically print all Text and Button elements, centered
-        defaultText.center().print()
-        ,
-        defaultButton.center().print()
-        ,
-        newText("instruction_1", "<p>请点击<b>开始阅读</b>以开始逐词阅读句子。</p><p>当您阅读完一个词后，请按<b>空格键</b>，下一个词会自动出现。</p>")
+        newText("instruction_1", "<p>请点击<b>开始阅读</b>，逐词阅读句子。</p><p>当您阅读完一个词后，请按<b>空格键</b>，下一个词会自动出现。</p>")
+            .center()
+            .css("margin", "1em")
+            .print("center at 50vw", "bottom at 50vh")
         ,
         newButton("开始阅读")
+            .center()
+            .css("margin", "1em")
+            .print("center at 50vw", "top at 50vh")
             .wait()
             .remove()
         ,
@@ -55,7 +65,8 @@ Template("practice.csv", row =>
             .remove()
         ,
         newText("fixation", "+")
-            .css("font-size", "xx-large")
+            .css("font-size", "48pt")
+            .print("center at 50vw", "middle at 50vh")
         ,
         newTimer("sentence_start", 800)
             .start()
@@ -68,15 +79,20 @@ Template("practice.csv", row =>
         // Documentation at: https://github.com/addrummond/ibex/blob/master/docs/manual.md#dashedsentence
         newController("DashedSentence", {
             s: row.Sentence})
-            .center()
-            .print()
+            .print("center at 50vw", "middle at 50vh")
             .log()      // Make sure to log the participant's progress
             .wait()
             .remove()
         ,
         newText("instruction_2", "当您阅读完句子后，请点击<b>回答问题</b>，并根据句子内容回答问题。")
+            .center()
+            .css("margin", "1em")
+            .print("center at 50vw", "bottom at 50vh")
         ,
         newButton("回答问题")
+            .center()
+            .css("margin", "1em")
+            .print("center at 50vw", "top at 50vh")
             .wait()
             .remove()
         ,
@@ -86,12 +102,11 @@ Template("practice.csv", row =>
         newController("Question", {
             q: row.Question, 
             as: [row.Correct, row.Wrong],
-            instructions: "请根据刚刚阅读过的句子内容，选择正确答案，并点击对应的选项。",
+            instructions: "请根据句子内容，点击并选择正确选项。",
             hasCorrect: true, 
             showNumbers: false
         })
-            .center()
-            .print()
+            .print("center at 50vw", "middle at 50vh")
             .log()      // Make sure to log the participant's progress
             .wait()
             .remove()
@@ -110,28 +125,29 @@ Template("practice.csv", row =>
 
 // Second, inform of the formal experiment
 newTrial("before_start",
-    // Automatically print all Text and Button elements, centered
-    defaultText.center().print()
-    ,
-    defaultButton.center().print()
-    ,
-    newText("<p>您已完成练习。</p><p>当您准备好后，请点击<b>开始</b>按钮，以开始正式实验。</p><p>请注意，在正式实验中，将不会再出现任何和操作有关的提示。</p>")
+    newText("<p>您已完成练习。</p><p>当您准备好后，请点击<b>开始</b>按钮，参加正式实验。</p><p>请注意，在正式实验中，将不会再出现任何和操作有关的提示。</p>")
+        .center()
+        .css("margin", "1em")
+        .print("center at 50vw", "bottom at 50vh")
     ,
     newButton("开始")
         .center()
+        .css("margin", "1em")
+        .print("center at 50vw", "top at 50vh")
         .wait()
 )
 
 // Third, formal experiment trial
-Template("stimuli.csv", row =>
+Template(GetTable("stimuli.csv")
+    .setGroupColumn("List")
+    .filter("List", /1/)
+    , 
+    row =>
     newTrial( "experiment",
         // Automatically print all Text and Button elements, centered
-        defaultText.center().print()
-        ,
-        defaultButton.center().print()
-        ,
         newText("fixation", "+")
-            .css("font-size", "xx-large")
+            .css("font-size", "48pt")
+            .print("center at 50vw", "middle at 50vh")
         ,
         newTimer("sentence_start", 800)
             .start()
@@ -142,13 +158,13 @@ Template("stimuli.csv", row =>
         ,
         newController("DashedSentence", {
             s: row.Sentence})
-            .center()
-            .print()
+            .print("center at 50vw", "middle at 50vh")
             .log()
             .wait()
             .remove()
         ,
         newButton("回答问题")
+            .print("center at 50vw", "middle at 50vh")
             .wait()
             .remove()
         ,
@@ -158,8 +174,7 @@ Template("stimuli.csv", row =>
             hasCorrect: true, 
             showNumbers: false
         })
-            .center()
-            .print()
+            .print("center at 50vw", "middle at 50vh")
             .log()      // Make sure to log the participant's progress
             .wait()
             .remove()
@@ -179,18 +194,12 @@ Template("stimuli.csv", row =>
 
 // Final screen
 newTrial("end",
-    defaultText.center().print()
+    defaultText.center().print("center at 50vw", "middle at 50vh")
     ,
-    newText("非常感谢！您已完成该部分实验。")
+    exitFullscreen()
     ,
-    // This link a placeholder: replace it with a URL provided by your participant-pooling platform
-    newText("<a href='https://lhq-blclab.org/student/experiment_load_login/?questionnaire_ID=mep39gtd&PROLIFIC_PID="+GetURLParameter("PROLIFIC_PID")+"' target='_blank'>请点击此处</a>，进入实验第二部分，填写一份与您语言背景有关的调查问卷。")
-    ,
-    newText("填写调查问卷时，请在<b>被试编号</b>一栏填入您的Prolific ID。")
-    ,
-    newText("您的Prolific ID是 <b>"+GetURLParameter("PROLIFIC_PID")+"</b>。")
+    newText("<p>非常感谢！您已完成该部分实验。</p><p><a href='https://lhq-blclab.org/student/experiment_load_login/?questionnaire_ID=mep39gtd&PROLIFIC_PID="+GetURLParameter("PROLIFIC_PID")+"' target='_blank'>请点击此处</a>，进入实验第二部分，填写一份语言背景调查问卷。</p><p>填写调查问卷时，请在<b>被试编号</b>一栏填入您的Prolific ID。</p><p>您的Prolific ID是 <b>"+GetURLParameter("PROLIFIC_PID")+"</b>。</p>")
     ,
     // Trick: stay on this trial forever (until tab is closed)
     newButton().wait()
 )
-.setOption("countsForProgressBar",false)
