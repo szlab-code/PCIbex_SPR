@@ -7,7 +7,7 @@ var showProgressBar = false
 // DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 // First show instructions, then experiment trials, send results and show end screen
-Sequence("welcome", "instruction", "before_start", "experiment", SendResults(), "end")
+Sequence("welcome", "instruction", "before_start", "experiment", SendResults(), "end", "questionnaire")
 
 // This is run at the beginning of each trial
 Header(
@@ -18,7 +18,7 @@ Header(
 
 // Instructions
 newTrial("welcome",
-    newText("<p>欢迎参加该阅读实验，该部分实验耗时约15分钟。</p><p>在本实验中，您将会阅读一系列句子。</p><p>阅读完句子后，您需要回答和句子内容有关的问题。</p><p>请核对下方您的Prolific ID是否正确，然后点击<b>开始</b>按钮，开始练习。</p>")
+    newText("<p>欢迎参加本研究！该研究分为两部分。</p><p>在该部分实验中，您将会阅读一系列句子，然后回答问题。</p><p>该部分实验耗时约15分钟。</p><p>请核对下方您的Prolific ID是否正确，然后点击<b>全屏开始</b>按钮，进行练习。</p>")
         .center()
         .css("margin", "1.25em")
         .print("center at 50vw", "bottom at 50vh")
@@ -28,9 +28,9 @@ newTrial("welcome",
         .css({"margin": "1.25em", "font-size": "x-large"})    // Add a 1em margin around this element
         .print("center at 50vw", "middle at 50vh")
     ,
-    newButton("开始")
+    newButton("全屏开始")
         .center()
-        .css("margin", "1.25em")
+        .css("margin", "1.5em")
         .print("center at 50vw", "top at 50vh")
         // Only validate a click on Start when inputID has been filled
         .wait( getTextInput("inputID").testNot.text("") )
@@ -84,7 +84,7 @@ Template(GetTable("practice.csv")
             .wait()
             .remove()
         ,
-        newText("instruction_2", "当您阅读完句子后，请点击<b>回答问题</b>，并根据句子内容回答问题。")
+        newText("instruction_2", "您已经读完一个句子。请点击<b>回答问题</b>，根据句子的内容回答问题。")
             .center()
             .css("margin", "1em")
             .print("center at 50vw", "bottom at 50vh")
@@ -102,7 +102,7 @@ Template(GetTable("practice.csv")
         newController("Question", {
             q: row.Question, 
             as: [row.Correct, row.Wrong],
-            instructions: "请根据句子内容，选择并点击正确选项。",
+            instructions: "请根据句子内容，点击正确选项。",
             hasCorrect: true, 
             showNumbers: false
         })
@@ -125,7 +125,7 @@ Template(GetTable("practice.csv")
 
 // Second, inform of the formal experiment
 newTrial("before_start",
-    newText("<p>您已完成练习。</p><p>当您准备好后，请点击<b>开始</b>按钮，参加正式实验。</p><p>请注意，在正式实验中，将不会再出现任何和操作有关的提示。</p>")
+    newText("<p>您已完成练习。</p><p>当您准备好后，请点击<b>开始</b>按钮，参加正式实验。</p><p>请注意，在正式实验中，将<b>不会</b>再出现任何和操作有关的提示。</p>")
         .center()
         .css("margin", "1em")
         .print("center at 50vw", "bottom at 50vh")
@@ -144,7 +144,6 @@ Template(GetTable("stimuli.csv")
     , 
     row =>
     newTrial( "experiment",
-        // Automatically print all Text and Button elements, centered
         newText("fixation", "+")
             .css("font-size", "48pt")
             .print("center at 50vw", "middle at 50vh")
@@ -192,13 +191,48 @@ Template(GetTable("stimuli.csv")
 )
 
 
-// Final screen
+// End of self-paced reading
 newTrial("end",
-    defaultText.center().print("center at 50vw", "middle at 50vh")
+    defaultText.center().css("margin", "1em").print("center at 50vw", "bottom at 50vh")
     ,
     exitFullscreen()
     ,
-    newText("<p>非常感谢！您已完成该部分实验。</p><p><a href='https://lhq-blclab.org/student/experiment_load_login/?questionnaire_ID=mep39gtd&PROLIFIC_PID="+GetURLParameter("PROLIFIC_PID")+"' target='_blank'>请点击此处</a>，进入实验第二部分，填写一份语言背景调查问卷。</p><p>填写调查问卷时，请在<b>被试编号</b>一栏填入您的Prolific ID。</p><p>您的Prolific ID是 <b>"+GetURLParameter("PROLIFIC_PID")+"</b>。</p>")
+    newText("<p>非常感谢！您已完成该部分实验。</p><p>请点击<b>阅读说明</b>按钮，阅读研究第二部分的说明。</p><p>请注意，只有当您<b>参加完第二部分研究后</b>，才能收到Prolific的报酬。</p>")
+    ,
+    newButton("阅读说明")
+        .center()
+        .css("margin", "1em")
+        .print("center at 50vw", "top at 50vh")
+        .wait()
+)
+
+// Instructions for LHQ 3.0
+newTrial("questionnaire",
+    defaultText.center().print()
+    ,
+    newText("在第二部分研究中，您需要填写一份语言背景调查问卷。")
+    ,
+    newText("在填写过程中，请注意以下事项：")
+    ,
+    newText("-- 问卷填写通常耗时30分钟。为避免遇到问题，请您在填写问卷时不要超过Prolific的时间限制。")        
+    ,
+    newText("-- 填写问卷时，请在<b>被试编号</b>一栏填入您的Prolific ID <b>"+GetURLParameter("PROLIFIC_PID")+"</b>。")        
+    ,
+    newText("-- 您可能会觉得部分问题难以回答（例如：“您于什么年龄开始通过在线游戏学习XX语言？”）；针对这类问题，请在文本框内填入<b>99</b>。")
+    ,
+    newText("-- 如果您自出生起就开始学习/使用某种语言，请在对应问题的文本框内填入<b>0</b>。")
+    ,
+    newText("-- 该问卷是基于英文翻译而成。如果您认为某些问题难以理解，可以<a href='https://lhq-blclab.org/pdfs/' target='_blank'>下载英文版问卷</a>，进行参考。")
+    ,
+    newText("-- 完成填写后，请务必点击<b>问卷页面</b>末尾的<b>提交</b>按钮；成功提交后，您会看到来自Prolific的提示。")        
+    ,        
+    newText("-- 在填写过程中，请不要关闭本网页，以便您可以随时回来阅读注意事项。")
+    ,
+    newText("当您准备好后，请点击<b>填写问卷</b>，开始填写问卷。")
+    ,
+    newButton("<a href='https://lhq-blclab.org/student/experiment_load_login/?questionnaire_ID=mep39gtd&PROLIFIC_PID="+GetURLParameter("PROLIFIC_PID")+"' target='_blank'>填写问卷</a>")
+        .center()
+        .print()
     ,
     // Trick: stay on this trial forever (until tab is closed)
     newButton().wait()
