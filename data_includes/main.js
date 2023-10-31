@@ -7,7 +7,9 @@ var showProgressBar = false
 // DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 // First show instructions, then experiment trials, send results and show end screen
-Sequence("welcome", "instruction", "before_start", "experiment", SendResults(), "end", "questionnaire")
+Sequence("counter", "welcome", "instruction", "before_start", "experiment", SendResults(), "end", "questionnaire")
+
+SetCounter("counter", "inc", 1)
 
 // This is run at the beginning of each trial
 Header(
