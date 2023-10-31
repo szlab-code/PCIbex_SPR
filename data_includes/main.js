@@ -4,7 +4,7 @@ CheckPreloaded()
 
 var showProgressBar = false
 
-// DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
+DebugOff()   // Uncomment this line only when you are 100% done designing your experiment
 
 // First show instructions, then experiment trials, send results and show end screen
 Sequence("counter", "welcome", "instruction", "before_start", "experiment", SendResults(), "end", "questionnaire")
@@ -232,7 +232,7 @@ newTrial("questionnaire",
     ,
     newText("当您准备好后，请点击<b>填写问卷</b>，开始填写问卷。")
     ,
-    newButton("<a href='https://lhq-blclab.org/student/experiment_load_login/?questionnaire_ID=mep39gtd&PROLIFIC_PID="+GetURLParameter("PROLIFIC_PID")+"' target='_blank'>填写问卷</a>")
+    newButton("<a href='https://lhq-blclab.org/student/experiment_load_login/?questionnaire_ID=iyh92scp&PROLIFIC_PID="+GetURLParameter("PROLIFIC_PID")+"' target='_blank'>填写问卷</a>")
         .center()
         .print()
     ,
