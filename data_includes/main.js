@@ -84,7 +84,7 @@ Template(GetTable("practice.csv")
             .wait()
             .remove()
         ,
-        newText("instruction_2", "您已经读完一个句子。请点击<b>回答问题</b>，根据句子的内容回答问题。")
+        newText("instruction_2", "接下来，请点击<b>回答问题</b>，根据刚刚句子的内容回答问题。")
             .center()
             .css("margin", "1em")
             .print("center at 50vw", "bottom at 50vh")
